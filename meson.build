@@ -58,7 +58,7 @@ public_conf.set('LIBZIM_WITH_XAPIAN', xapian_dep.found())
 pkg_requires = ['liblzma', 'libzstd']
 if build_machine.system() == 'windows'
     extra_link_args = ['-lRpcrt4', '-lWs2_32', '-lwinmm', '-licuuc', '-licuin']
-    extra_cpp_args = ['-DSORTPP_PASS']
+    extra_cpp_args = ['-DSORTPP_PASS','-DLIBZIM_EXPORT_DLL']
 else
     extra_link_args = []
     extra_cpp_args = []

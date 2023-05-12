@@ -283,7 +283,7 @@ namespace zim
         LIBZIM_API std::unique_ptr<ContentProvider> getContentProvider() const;
 
       protected:
-        LIBZIM_API std::string content;
+        std::string content;
 
       private:
         StringItem(const std::string& path, const std::string& mimetype,

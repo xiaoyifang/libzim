@@ -52,7 +52,7 @@ class SuggestionDataBase;
  * However, SuggestionSearcher (and subsequent classes) do not maintain a global/
  * share state You can create several Searchers and use them in different threads.
  */
-class LIBZIM_API SuggestionSearcher
+class SuggestionSearcher
 {
   public:
     /** SuggestionSearcher constructor.
@@ -61,13 +61,13 @@ class LIBZIM_API SuggestionSearcher
      *
      * @param archive An archive to suggest on.
      */
-    explicit SuggestionSearcher(const Archive& archive);
+    LIBZIM_API explicit SuggestionSearcher(const Archive& archive);
 
-    SuggestionSearcher(const SuggestionSearcher& other);
-    SuggestionSearcher& operator=(const SuggestionSearcher& other);
-    SuggestionSearcher(SuggestionSearcher&& other);
-    SuggestionSearcher& operator=(SuggestionSearcher&& other);
-    ~SuggestionSearcher();
+    LIBZIM_API SuggestionSearcher(const SuggestionSearcher& other);
+    LIBZIM_API SuggestionSearcher& operator=(const SuggestionSearcher& other);
+    LIBZIM_API SuggestionSearcher(SuggestionSearcher&& other);
+    LIBZIM_API SuggestionSearcher& operator=(SuggestionSearcher&& other);
+    LIBZIM_API ~SuggestionSearcher();
 
     /** Create a SuggestionSearch for a specific query.
      *
@@ -75,13 +75,13 @@ class LIBZIM_API SuggestionSearcher
      *
      * @param query The SuggestionQuery to search.
      */
-    SuggestionSearch suggest(const std::string& query);
+    LIBZIM_API SuggestionSearch suggest(const std::string& query);
 
     /** Set the verbosity of search operations.
      *
      * @param verbose The verbose mode to set
      */
-    void setVerbose(bool verbose);
+    LIBZIM_API void setVerbose(bool verbose);
 
   private: // methods
     void initDatabase();
@@ -95,12 +95,12 @@ class LIBZIM_API SuggestionSearcher
 /**
  * A SuggestionSearch represent a particular suggestion search, based on a `SuggestionSearcher`.
  */
-class LIBZIM_API SuggestionSearch
+class SuggestionSearch
 {
     public:
-        SuggestionSearch(SuggestionSearch&& s);
-        SuggestionSearch& operator=(SuggestionSearch&& s);
-        ~SuggestionSearch();
+        LIBZIM_API SuggestionSearch(SuggestionSearch&& s);
+        LIBZIM_API SuggestionSearch& operator=(SuggestionSearch&& s);
+        LIBZIM_API ~SuggestionSearch();
 
         /** Get a set of results for this search.
          *
@@ -109,13 +109,13 @@ class LIBZIM_API SuggestionSearch
          * @param maxResults The maximum number of results to return
          *                   (offset of last result from the start of range).
          */
-        const SuggestionResultSet getResults(int start, int maxResults) const;
+        LIBZIM_API const SuggestionResultSet getResults(int start, int maxResults) const;
 
         /** Get the number of estimated results for this suggestion search.
          *
          * As the name suggest, it is a estimation of the number of results.
          */
-        int getEstimatedMatches() const;
+        LIBZIM_API int getEstimatedMatches() const;
 
     private: // methods
         SuggestionSearch(std::shared_ptr<SuggestionDataBase> p_internalDb, const std::string& query);
@@ -129,7 +129,7 @@ class LIBZIM_API SuggestionSearch
 #ifdef ZIM_PRIVATE
     public:
         // Close Xapian db to force range based search
-        const void forceRangeSuggestion();
+        LIBZIM_API const void forceRangeSuggestion();
 #endif
 
 // Xapian based methods and data
@@ -147,20 +147,20 @@ class LIBZIM_API SuggestionSearch
  *
  * It mainly allows to get a iterator either based on an MSetIterator or a RangeIterator.
  */
-class LIBZIM_API SuggestionResultSet
+class SuggestionResultSet
 {
   public:
-    typedef SuggestionIterator iterator;
-    typedef Archive::EntryRange<EntryOrder::titleOrder> EntryRange;
+    LIBZIM_API typedef SuggestionIterator iterator;
+    LIBZIM_API typedef Archive::EntryRange<EntryOrder::titleOrder> EntryRange;
 
     /** The begin iterator on the result range. */
-    iterator begin() const;
+    LIBZIM_API iterator begin() const;
 
     /** The end iterator on the result range. */
-    iterator end() const;
+    LIBZIM_API iterator end() const;
 
     /** The size of the SearchResult (end()-begin()) */
-    int size() const;
+    LIBZIM_API int size() const;
 
   private: // data
     std::shared_ptr<SuggestionDataBase> mp_internalDb;

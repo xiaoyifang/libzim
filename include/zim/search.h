@@ -53,7 +53,7 @@ class SearchResultSet;
  * However, Searcher (and subsequent classes) do not maintain a global/share state.
  * You can create several Searchers and use them in different threads.
  */
-class LIBZIM_API Searcher
+class Searcher
 {
   public:
     /** Searcher constructor.
@@ -62,7 +62,7 @@ class LIBZIM_API Searcher
      *
      * @param archives A list(vector) of archives to search on.
      */
-    explicit Searcher(const std::vector<Archive>& archives);
+    LIBZIM_API explicit Searcher(const std::vector<Archive>& archives);
 
     /** Searcher constructor.
      *
@@ -70,18 +70,18 @@ class LIBZIM_API Searcher
      *
      * @param archive A archive to search on.
      */
-    explicit Searcher(const Archive& archive);
-    Searcher(const Searcher& other);
-    Searcher& operator=(const Searcher& other);
-    Searcher(Searcher&& other);
-    Searcher& operator=(Searcher&& other);
-    ~Searcher();
+    LIBZIM_API explicit Searcher(const Archive& archive);
+    LIBZIM_API Searcher(const Searcher& other);
+    LIBZIM_API Searcher& operator=(const Searcher& other);
+    LIBZIM_API Searcher(Searcher&& other);
+    LIBZIM_API Searcher& operator=(Searcher&& other);
+    LIBZIM_API ~Searcher();
 
     /** Add a archive to the searcher.
      *
      * Adding a archive to a searcher do not invalidate already created search.
      */
-    Searcher& addArchive(const Archive& archive);
+    LIBZIM_API Searcher& addArchive(const Archive& archive);
 
     /** Create a search for a specific query.
      *
@@ -92,13 +92,13 @@ class LIBZIM_API Searcher
      * @throws std::runtime_error if the searcher does not have a valid
      *         FT database.
      */
-    Search search(const Query& query);
+    LIBZIM_API Search search(const Query& query);
 
     /** Set the verbosity of search operations.
      *
      * @param verbose The verbose mode to set
      */
-    void setVerbose(bool verbose);
+    LIBZIM_API void setVerbose(bool verbose);
 
   private: // methods
     void initDatabase();
@@ -115,20 +115,20 @@ class LIBZIM_API Searcher
  * It describe what have to be searched and how.
  * A Query is "database" independent.
  */
-class LIBZIM_API Query
+class Query
 {
   public:
     /** Query constructor.
      *
      * Create a empty query.
      */
-    Query(const std::string& query = "");
+    LIBZIM_API Query(const std::string& query = "");
 
     /** Set the textual query of the Query.
      *
      * @param query The string to search for.
      */
-    Query& setQuery(const std::string& query);
+    LIBZIM_API Query& setQuery(const std::string& query);
 
     /** Set the geographical query of the Query.
      *
@@ -139,14 +139,14 @@ class LIBZIM_API Query
      * @param longitude The longitude of the point.
      * @param distance The maximal distance from the point.
      */
-    Query& setGeorange(float latitude, float longitude, float distance);
+    LIBZIM_API Query& setGeorange(float latitude, float longitude, float distance);
 
-    std::string m_query { "" };
+    LIBZIM_API std::string m_query { "" };
 
-    bool m_geoquery { false };
-    float m_latitude { 0 };
-    float m_longitude { 0 };
-    float m_distance { 0 } ;
+    LIBZIM_API bool m_geoquery { false };
+    LIBZIM_API float m_latitude { 0 };
+    LIBZIM_API float m_longitude { 0 };
+    LIBZIM_API float m_distance { 0 } ;
 };
 
 
@@ -156,12 +156,12 @@ class LIBZIM_API Query
  * This is somehow the reunification of a `Searcher` (what to search on)
  * and a `Query` (what to search for).
  */
-class LIBZIM_API Search
+class Search
 {
     public:
-        Search(Search&& s);
-        Search& operator=(Search&& s);
-        ~Search();
+        LIBZIM_API Search(Search&& s);
+        LIBZIM_API Search& operator=(Search&& s);
+        LIBZIM_API ~Search();
 
         /** Get a set of results for this search.
          *
@@ -170,13 +170,13 @@ class LIBZIM_API Search
          * @param maxResults The maximum number of results to return
          *                   (offset of last result from the start of range).
          */
-        const SearchResultSet getResults(int start, int maxResults) const;
+        LIBZIM_API const SearchResultSet getResults(int start, int maxResults) const;
 
         /** Get the number of estimated results for this search.
          *
          * As the name suggest, it is a estimation of the number of results.
          */
-        int getEstimatedMatches() const;
+        LIBZIM_API int getEstimatedMatches() const;
 
     private: // methods
         Search(std::shared_ptr<InternalDataBase> p_internalDb, const Query& query);
@@ -195,19 +195,19 @@ class LIBZIM_API Search
  *
  * It mainly allows to get a iterator.
  */
-class LIBZIM_API SearchResultSet
+class SearchResultSet
 {
   public:
-    typedef SearchIterator iterator;
+    LIBZIM_API typedef SearchIterator iterator;
 
     /** The begin iterator on the result range. */
-    iterator begin() const;
+    LIBZIM_API iterator begin() const;
 
     /** The end iterator on the result range. */
-    iterator end() const;
+    LIBZIM_API iterator end() const;
 
     /** The size of the SearchResult (end()-begin()) */
-    int size() const;
+    LIBZIM_API int size() const;
 
   private:
     SearchResultSet(std::shared_ptr<InternalDataBase> p_internalDb, Xapian::MSet&& mset);

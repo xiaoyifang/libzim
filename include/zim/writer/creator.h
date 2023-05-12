@@ -61,7 +61,7 @@ namespace zim
      * - Any other exception thrown for unknown reason.
      * By default, creator status is not changed by thrown exception and creation should stop.
      */
-    class LIBZIM_API Creator
+    class Creator
     {
       public:
         /**
@@ -215,23 +215,23 @@ namespace zim
         LIBZIM_API void setUuid(const zim::Uuid& uuid) { m_uuid = uuid; }
 
       private:
-        LIBZIM_API std::unique_ptr<CreatorData> data;
+        std::unique_ptr<CreatorData> data;
 
         // configuration
-        LIBZIM_API bool m_verbose = false;
-        LIBZIM_API Compression m_compression = Compression::Zstd;
-        LIBZIM_API bool m_withIndex = false;
-        LIBZIM_API size_t m_clusterSize;
-        LIBZIM_API std::string m_indexingLanguage;
-        LIBZIM_API unsigned m_nbWorkers = 4;
+        bool m_verbose = false;
+        Compression m_compression = Compression::Zstd;
+        bool m_withIndex = false;
+        size_t m_clusterSize;
+        std::string m_indexingLanguage;
+        unsigned m_nbWorkers = 4;
 
         // zim data
-        LIBZIM_API std::string m_mainPath;
-        LIBZIM_API Uuid m_uuid = Uuid::generate();
+        std::string m_mainPath;
+        Uuid m_uuid = Uuid::generate();
 
-        LIBZIM_API void fillHeader(Fileheader* header) const;
-        LIBZIM_API void writeLastParts() const;
-        LIBZIM_API void checkError();
+        void fillHeader(Fileheader* header) const;
+        void writeLastParts() const;
+        void checkError();
     };
   }
 

@@ -31,30 +31,30 @@ class SuggestionResultSet;
 class SuggestionItem;
 class SearchIterator;
 
-class LIBZIM_API SuggestionIterator : public std::iterator<std::bidirectional_iterator_tag, SuggestionItem>
+class SuggestionIterator : public std::iterator<std::bidirectional_iterator_tag, SuggestionItem>
 {
     typedef Archive::iterator<EntryOrder::titleOrder> RangeIterator;
     friend class SuggestionResultSet;
     public:
-        SuggestionIterator() = delete;
-        SuggestionIterator(const SuggestionIterator& it);
-        SuggestionIterator& operator=(const SuggestionIterator& it);
-        SuggestionIterator(SuggestionIterator&& it);
-        SuggestionIterator& operator=(SuggestionIterator&& it);
-        ~SuggestionIterator();
+        LIBZIM_API SuggestionIterator() = delete;
+        LIBZIM_API SuggestionIterator(const SuggestionIterator& it);
+        LIBZIM_API SuggestionIterator& operator=(const SuggestionIterator& it);
+        LIBZIM_API SuggestionIterator(SuggestionIterator&& it);
+        LIBZIM_API SuggestionIterator& operator=(SuggestionIterator&& it);
+        LIBZIM_API ~SuggestionIterator();
 
-        bool operator== (const SuggestionIterator& it) const;
-        bool operator!= (const SuggestionIterator& it) const;
+        LIBZIM_API bool operator== (const SuggestionIterator& it) const;
+        LIBZIM_API bool operator!= (const SuggestionIterator& it) const;
 
-        SuggestionIterator& operator++();
-        SuggestionIterator operator++(int);
-        SuggestionIterator& operator--();
-        SuggestionIterator operator--(int);
+        LIBZIM_API SuggestionIterator& operator++();
+        LIBZIM_API SuggestionIterator operator++(int);
+        LIBZIM_API SuggestionIterator& operator--();
+        LIBZIM_API SuggestionIterator operator--(int);
 
-        Entry getEntry() const;
+        LIBZIM_API Entry getEntry() const;
 
-        const SuggestionItem& operator*();
-        const SuggestionItem* operator->();
+        LIBZIM_API const SuggestionItem& operator*();
+        LIBZIM_API const SuggestionItem* operator->();
 
     private: // data
         struct SuggestionInternalData;
@@ -81,19 +81,19 @@ class LIBZIM_API SuggestionIterator : public std::iterator<std::bidirectional_it
 #endif  // LIBZIM_WITH_XAPIAN
 };
 
-class LIBZIM_API SuggestionItem
+class SuggestionItem
 {
     public: // methods
-        SuggestionItem(std::string title, std::string path, std::string snippet = "")
+        LIBZIM_API SuggestionItem(std::string title, std::string path, std::string snippet = "")
         :   title(title),
             path(path),
             snippet(snippet) {}
 
-        std::string getTitle() const { return title; }
-        std::string getPath() const { return path; }
-        std::string getSnippet() const { return snippet; }
+        LIBZIM_API std::string getTitle() const { return title; }
+        LIBZIM_API std::string getPath() const { return path; }
+        LIBZIM_API std::string getSnippet() const { return snippet; }
 
-        bool hasSnippet() const { return !snippet.empty(); }
+        LIBZIM_API bool hasSnippet() const { return !snippet.empty(); }
 
     private: // data
         std::string title;

@@ -28,26 +28,26 @@
 
 namespace zim
 {
-  class LIBZIM_API ZimFileFormatError : public std::runtime_error
+  class ZimFileFormatError : public std::runtime_error
   {
     public:
-      explicit ZimFileFormatError(const std::string& msg)
+      LIBZIM_API explicit ZimFileFormatError(const std::string& msg)
         : std::runtime_error(msg)
         { }
   };
 
-  class LIBZIM_API InvalidType: public std::logic_error
+  class InvalidType: public std::logic_error
   {
     public:
-      explicit InvalidType(const std::string& msg)
+      LIBZIM_API explicit InvalidType(const std::string& msg)
         : std::logic_error(msg)
       {}
   };
 
-  class LIBZIM_API EntryNotFound : public std::runtime_error
+  class EntryNotFound : public std::runtime_error
   {
     public:
-      explicit EntryNotFound(const std::string& msg)
+      LIBZIM_API explicit EntryNotFound(const std::string& msg)
        : std::runtime_error(msg)
       {}
   };
@@ -56,19 +56,19 @@ namespace zim
    *
    * Most exceptions actually thrown are inheriting this exception.
    */
-  class LIBZIM_API CreatorError : public std::runtime_error
+  class CreatorError : public std::runtime_error
   {
     public:
-      explicit CreatorError(const std::string& message)
+      LIBZIM_API explicit CreatorError(const std::string& message)
        : std::runtime_error(message)
       {}
   };
 
    /* Exception thrown when a entry cannot be added to the Creator.*/
-  class LIBZIM_API InvalidEntry : public CreatorError
+  class InvalidEntry : public CreatorError
   {
     public:
-      explicit InvalidEntry(const std::string& message)
+      LIBZIM_API explicit InvalidEntry(const std::string& message)
        : CreatorError(message)
       {}
   };
@@ -83,10 +83,10 @@ namespace zim
    * If a incoherence has been detected in those implementations a
    * `IncoherentImplementationError` will be thrown.
    */
-  class LIBZIM_API IncoherentImplementationError : public CreatorError
+  class IncoherentImplementationError : public CreatorError
   {
     public:
-      explicit IncoherentImplementationError(const std::string& message)
+      LIBZIM_API explicit IncoherentImplementationError(const std::string& message)
        : CreatorError(message)
       {}
   };
@@ -115,15 +115,15 @@ namespace zim
    * }
    * ```
    */
-  class LIBZIM_API AsyncError : public CreatorError
+  class AsyncError : public CreatorError
   {
     public:
-      explicit AsyncError(const std::exception_ptr exception)
+      LIBZIM_API explicit AsyncError(const std::exception_ptr exception)
        : CreatorError(buildErrorMessage(exception)),
          m_exception(exception)
       {}
 
-      [[noreturn]] void rethrow() const {
+      LIBZIM_API [[noreturn]] void rethrow() const {
         std::rethrow_exception(m_exception);
       }
 
@@ -151,10 +151,10 @@ namespace zim
    * If the creator is in error state (mostly because a AsyncError has already
    * being thrown), any call to any method on it will thrown a `CreatorStateError`.
    */
-  class LIBZIM_API CreatorStateError : public CreatorError
+  class CreatorStateError : public CreatorError
   {
     public:
-      explicit CreatorStateError()
+      LIBZIM_API explicit CreatorStateError()
        : CreatorError("Creator is in error state.")
       {}
   };

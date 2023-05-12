@@ -47,10 +47,10 @@ namespace zim
      * (But default `Item::getIndexData` returns a default implementation
      * for IndexData which works for html content.)
      */
-    class LIBZIM_API IndexData {
+    class IndexData {
       public:
-        using GeoPosition = std::tuple<bool, double, double>;
-        virtual ~IndexData() = default;
+        LIBZIM_API using GeoPosition = std::tuple<bool, double, double>;
+        LIBZIM_API virtual ~IndexData() = default;
 
         /**
          * If the IndexData actually has data to index.
@@ -60,7 +60,7 @@ namespace zim
          *
          * @return true if the item associated to this IndexData must be indexed.
          */
-        virtual bool hasIndexData() const = 0;
+        LIBZIM_API virtual bool hasIndexData() const = 0;
 
         /**
          * The title to use when indexing the item.
@@ -70,7 +70,7 @@ namespace zim
          *
          * @return the title to use.
          */
-        virtual std::string getTitle() const = 0;
+        LIBZIM_API virtual std::string getTitle() const = 0;
 
         /**
          * The content to use when indexing the item.
@@ -82,7 +82,7 @@ namespace zim
          *
          * @return the content to use.
          */
-        virtual std::string getContent() const = 0;
+        LIBZIM_API virtual std::string getContent() const = 0;
 
         /**
          * The keywords to use when indexing the item.
@@ -92,7 +92,7 @@ namespace zim
          *
          * @return a string containing keywords separated by space.
          */
-        virtual std::string getKeywords() const = 0;
+        LIBZIM_API virtual std::string getKeywords() const = 0;
 
         /**
          * The number of words in the content.
@@ -103,7 +103,7 @@ namespace zim
          *
          * @return the number of words in the item.
          */
-        virtual uint32_t getWordCount() const = 0;
+        LIBZIM_API virtual uint32_t getWordCount() const = 0;
 
         /**
          * The Geographical position of the subject covered by the item.
@@ -114,7 +114,7 @@ namespace zim
          *         a 3 tuple (false, _, _) if having a GeoPosition is not
          *         relevant.
          */
-        virtual GeoPosition getGeoPosition() const = 0;
+        LIBZIM_API virtual GeoPosition getGeoPosition() const = 0;
     };
 
     /**

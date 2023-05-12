@@ -42,15 +42,15 @@ namespace zim
      * `ContentProvider` is an abstract class in charge of providing the content to
      * add in the archive to the creator.
      */
-    class LIBZIM_API ContentProvider {
+    class ContentProvider {
       public:
-        virtual ~ContentProvider() = default;
+        LIBZIM_API virtual ~ContentProvider() = default;
         /**
          * The size of the content to add into the archive.
          *
          * @return the total size of the content.
          */
-        virtual zim::size_type getSize() const = 0;
+        LIBZIM_API virtual zim::size_type getSize() const = 0;
 
         /**
          * Return a blob to add to the archive.
@@ -75,13 +75,13 @@ namespace zim
          * A call to feed ensure that the data returned by a previous call will not
          * be used anymore.
          */
-        virtual Blob feed() = 0;
+        LIBZIM_API virtual Blob feed() = 0;
     };
 
     /**
      * StringProvider provide the content stored in a string.
      */
-    class LIBZIM_API StringProvider : public ContentProvider {
+    class StringProvider : public ContentProvider {
       public:
         /**
          * Create a provider using a string as content.
@@ -107,7 +107,7 @@ namespace zim
      * It is mostly the same thing that `StringProvider` but use a shared_ptr
      * to avoid copy.
      */
-    class LIBZIM_API SharedStringProvider : public ContentProvider {
+    class SharedStringProvider : public ContentProvider {
       public:
         /**
          * Create a provider using a string as content.
@@ -115,36 +115,36 @@ namespace zim
          *
          * @param content the content to serve.
          */
-        explicit SharedStringProvider(std::shared_ptr<const std::string> content)
+        LIBZIM_API explicit SharedStringProvider(std::shared_ptr<const std::string> content)
           : content(content),
             feeded(false)
         {}
-        zim::size_type getSize() const { return content->size(); }
-        Blob feed();
+        LIBZIM_API zim::size_type getSize() const { return content->size(); }
+        LIBZIM_API Blob feed();
 
       protected:
-        std::shared_ptr<const std::string> content;
-        bool feeded;
+        LIBZIM_API std::shared_ptr<const std::string> content;
+        LIBZIM_API bool feeded;
     };
 
     /**
      * FileProvider provide the content stored in file.
      */
-    class LIBZIM_API FileProvider : public ContentProvider {
+    class FileProvider : public ContentProvider {
       public:
         /**
          * Create a provider using file as content.
          *
          * @param filepath the path to the file to serve.
          */
-        explicit FileProvider(const std::string& filepath);
-        ~FileProvider();
-        zim::size_type getSize() const { return size; }
-        Blob feed();
+        LIBZIM_API explicit FileProvider(const std::string& filepath);
+        LIBZIM_API ~FileProvider();
+        LIBZIM_API zim::size_type getSize() const { return size; }
+        LIBZIM_API Blob feed();
 
       protected:
-        std::string filepath;
-        zim::size_type size;
+        LIBZIM_API std::string filepath;
+        LIBZIM_API zim::size_type size;
 
       private:
         std::unique_ptr<char[]> buffer;

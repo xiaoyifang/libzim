@@ -36,14 +36,14 @@ namespace zim
    *
    * All `Entry`'s methods are threadsafe.
    */
-  class LIBZIM_API Entry
+  class Entry
   {
     public:
-      explicit Entry(std::shared_ptr<FileImpl> file_, entry_index_type idx_);
+      LIBZIM_API explicit Entry(std::shared_ptr<FileImpl> file_, entry_index_type idx_);
 
-      bool isRedirect() const;
-      std::string getTitle() const;
-      std::string getPath() const;
+      LIBZIM_API bool isRedirect() const;
+      LIBZIM_API std::string getTitle() const;
+      LIBZIM_API std::string getPath() const;
 
       /** Get the item associated to the entry.
        *
@@ -54,7 +54,7 @@ namespace zim
        * @return The Item associated to the entry.
        * @exception InvalidType if the entry is a redirection and follow is false.
        */
-      Item getItem(bool follow=false) const;
+      LIBZIM_API Item getItem(bool follow=false) const;
 
       /** Get the item associated to the target entry.
        *
@@ -64,14 +64,14 @@ namespace zim
        * @return the Item associated with the targeted entry.
        * @exception InvalidType if the entry is not a redirection.
        */
-      Item getRedirect() const;
+      LIBZIM_API Item getRedirect() const;
 
       /** Get the Entry targeted by the entry.
        *
        * @return The entry directly targeted by this redirect entry.
        * @exception InvalidEntry if the entry is not a redirection.
        */
-      Entry getRedirectEntry() const;
+      LIBZIM_API Entry getRedirectEntry() const;
 
       /** Get the index of the Entry targeted by the entry.
        *
@@ -79,9 +79,9 @@ namespace zim
        *         entry.
        * @exception InvalidEntry if the entry is not a redirection.
        */
-      entry_index_type getRedirectEntryIndex() const;
+      LIBZIM_API entry_index_type getRedirectEntryIndex() const;
 
-      entry_index_type getIndex() const   { return m_idx; }
+      LIBZIM_API entry_index_type getIndex() const   { return m_idx; }
 
     private:
       std::shared_ptr<FileImpl> m_file;

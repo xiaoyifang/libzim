@@ -53,7 +53,7 @@ namespace zim
    *
    * All methods of archive may throw an `ZimFileFormatError` if the file is invalid.
    */
-  class LIBZIM_API Archive
+  class Archive
   {
     public:
       template<EntryOrder order> class EntryRange;
@@ -70,7 +70,7 @@ namespace zim
        *
        *  @param fname The filename to the file to open (utf8 encoded)
        */
-      explicit Archive(const std::string& fname);
+      LIBZIM_API explicit Archive(const std::string& fname);
 
 #ifndef _WIN32
       /** Archive constructor.
@@ -81,7 +81,7 @@ namespace zim
        *
        *  @param fd The descriptor of a seekable file representing a ZIM archive
        */
-      explicit Archive(int fd);
+      LIBZIM_API explicit Archive(int fd);
 
       /** Archive constructor.
        *
@@ -96,7 +96,7 @@ namespace zim
        *  of the file (rather than the current position associated with fd).
        *  @param size The size of the ZIM archive.
        */
-      Archive(int fd, offset_type offset, size_type size);
+      LIBZIM_API Archive(int fd, offset_type offset, size_type size);
 #endif
 
       /** Return the filename of the zim file.
@@ -106,7 +106,7 @@ namespace zim
        *
        *  @return The logical filename of the archive.
        */
-      const std::string& getFilename() const;
+      LIBZIM_API const std::string& getFilename() const;
 
       /** Return the logical archive size.
        *
@@ -115,7 +115,7 @@ namespace zim
        *
        *  @return The logical size of the archive.
        */
-      size_type getFilesize() const;
+      LIBZIM_API size_type getFilesize() const;
 
       /** Return the number of entries in the archive.
        *
@@ -124,7 +124,7 @@ namespace zim
        *
        *  @return the number of all entries in the archive.
        */
-      entry_index_type getAllEntryCount() const;
+      LIBZIM_API entry_index_type getAllEntryCount() const;
 
       /** Return the number of user entries in the archive.
        *
@@ -133,7 +133,7 @@ namespace zim
        *
        *  @return the number of user entries in the archive.
        */
-      entry_index_type getEntryCount() const;
+      LIBZIM_API entry_index_type getEntryCount() const;
 
       /** Return the number of articles in the archive.
        *
@@ -144,7 +144,7 @@ namespace zim
        *
        *  @return the number of articles in the archive.
        */
-      entry_index_type getArticleCount() const;
+      LIBZIM_API entry_index_type getArticleCount() const;
 
       /** Return the number of media in the archive.
        *
@@ -152,13 +152,13 @@ namespace zim
        *
        * @return the number of media in the archive.
        */
-      entry_index_type getMediaCount() const;
+      LIBZIM_API entry_index_type getMediaCount() const;
 
       /** The uuid of the archive.
        *
        *  @return the uuid of the archive.
        */
-      Uuid getUuid() const;
+      LIBZIM_API Uuid getUuid() const;
 
       /** Get a specific metadata content.
        *
@@ -168,7 +168,7 @@ namespace zim
        *  @return The content of the metadata.
        *  @exception EntryNotFound If the metadata is not in the arcthive.
        */
-      std::string getMetadata(const std::string& name) const;
+      LIBZIM_API std::string getMetadata(const std::string& name) const;
 
       /** Get a specific metadata item.
        *
@@ -178,13 +178,13 @@ namespace zim
        *  @return The item associated to the metadata.
        *  @exception EntryNotFound If the metadata in not in the archive.
        */
-      Item getMetadataItem(const std::string& name) const;
+      LIBZIM_API Item getMetadataItem(const std::string& name) const;
 
       /** Get the list of metadata stored in the archive.
        *
        *  @return The list of metadata in the archive.
        */
-      std::vector<std::string> getMetadataKeys() const;
+      LIBZIM_API std::vector<std::string> getMetadataKeys() const;
 
       /** Get the illustration item of the archive.
        *
@@ -194,7 +194,7 @@ namespace zim
        *  @return The illustration item.
        *  @exception EntryNotFound If no illustration item can be found.
        */
-      Item getIllustrationItem(unsigned int size=48) const;
+      LIBZIM_API Item getIllustrationItem(unsigned int size=48) const;
 
       /** Return a list of available sizes (width) for the illustations in the archive.
        *
@@ -204,7 +204,7 @@ namespace zim
        *
        * @return A set of size.
        */
-      std::set<unsigned int> getIllustrationSizes() const;
+      LIBZIM_API std::set<unsigned int> getIllustrationSizes() const;
 
 
       /** Get an entry using its "path" index.
@@ -216,7 +216,7 @@ namespace zim
        *  @return The Entry.
        *  @exception std::out_of_range If idx is greater than the number of entry.
        */
-      Entry getEntryByPath(entry_index_type idx) const;
+      LIBZIM_API Entry getEntryByPath(entry_index_type idx) const;
 
       /** Get an entry using a path.
        *
@@ -227,7 +227,7 @@ namespace zim
        *  @return The Entry.
        *  @exception EntryNotFound If no entry has the asked path.
        */
-      Entry getEntryByPath(const std::string& path) const;
+      LIBZIM_API Entry getEntryByPath(const std::string& path) const;
 
       /** Get an entry using its "title" index.
        *
@@ -238,7 +238,7 @@ namespace zim
        *  @return The Entry.
        *  @exception std::out_of_range If idx is greater than the number of entry.
        */
-      Entry getEntryByTitle(entry_index_type idx) const;
+      LIBZIM_API Entry getEntryByTitle(entry_index_type idx) const;
 
       /** Get an entry using a title.
        *
@@ -248,7 +248,7 @@ namespace zim
        *  @return The Entry.
        *  @exception EntryNotFound If no entry has the asked title.
        */
-      Entry getEntryByTitle(const std::string& title) const;
+      LIBZIM_API Entry getEntryByTitle(const std::string& title) const;
 
       /** Get an entry using its "cluster" index.
        *
@@ -263,14 +263,14 @@ namespace zim
        *  @return The Entry.
        *  @exception std::out_of_range If idx is greater than the number of entry.
        */
-      Entry getEntryByClusterOrder(entry_index_type idx) const;
+      LIBZIM_API Entry getEntryByClusterOrder(entry_index_type idx) const;
 
       /** Get the main entry of the archive.
        *
        *  @return The Main entry.
        *  @exception EntryNotFound If no main entry has been specified in the archive.
        */
-      Entry getMainEntry() const;
+      LIBZIM_API Entry getMainEntry() const;
 
       /** Get a random entry.
        *
@@ -279,14 +279,14 @@ namespace zim
        * @return A random entry.
        * @exception EntryNotFound If no valid random entry can be found.
        */
-      Entry getRandomEntry() const;
+      LIBZIM_API Entry getRandomEntry() const;
 
       /** Check in an entry has path in the archive.
        *
        *  @param path The entry's path.
        *  @return True if the path in the archive, false else.
        */
-      bool hasEntryByPath(const std::string& path) const {
+      LIBZIM_API bool hasEntryByPath(const std::string& path) const {
         try{
           getEntryByPath(path);
           return true;
@@ -298,7 +298,7 @@ namespace zim
        *  @param title The entry's title.
        *  @return True if the title in the archive, false else.
        */
-      bool hasEntryByTitle(const std::string& title) const {
+      LIBZIM_API bool hasEntryByTitle(const std::string& title) const {
         try{
           getEntryByTitle(title);
           return true;
@@ -309,7 +309,7 @@ namespace zim
        *
        * @return True if the archive has a main entry.
        */
-      bool hasMainEntry() const;
+      LIBZIM_API bool hasMainEntry() const;
 
       /** Check if archive has a favicon entry
        *
@@ -317,19 +317,19 @@ namespace zim
        * @return True if the archive has a corresponding illustration entry.
        *         (Always True if the archive has no illustration, but a favicon)
        */
-      bool hasIllustration(unsigned int size=48) const;
+      LIBZIM_API bool hasIllustration(unsigned int size=48) const;
 
       /** Check if the archive has a fulltext index.
        *
        * @return True if the archive has a fulltext index
        */
-      bool hasFulltextIndex() const;
+      LIBZIM_API bool hasFulltextIndex() const;
 
       /** Check if the archive has a title index.
        *
        * @return True if the archive has a title index
        */
-      bool hasTitleIndex() const;
+      LIBZIM_API bool hasTitleIndex() const;
 
 
       /** Get a "iterable" by path order.
@@ -346,7 +346,7 @@ namespace zim
        *
        *  @return A range on all the entries, in path order.
        */
-      EntryRange<EntryOrder::pathOrder> iterByPath() const;
+      LIBZIM_API EntryRange<EntryOrder::pathOrder> iterByPath() const;
 
       /** Get a "iterable" by title order.
        *
@@ -366,7 +366,7 @@ namespace zim
        *
        *  @return A range on all the entries, in title order.
        */
-      EntryRange<EntryOrder::titleOrder> iterByTitle() const;
+      LIBZIM_API EntryRange<EntryOrder::titleOrder> iterByTitle() const;
 
       /** Get a "iterable" by a efficient order.
        *
@@ -382,7 +382,7 @@ namespace zim
        *
        *  @return A range on all the entries, in efficitent order.
        */
-      EntryRange<EntryOrder::efficientOrder> iterEfficient() const;
+      LIBZIM_API EntryRange<EntryOrder::efficientOrder> iterEfficient() const;
 
       /** Find a range of entries starting with path.
        *
@@ -393,7 +393,7 @@ namespace zim
        *         and ending past the last entry.
        *         If no entry starts with `path`, begin == end.
        */
-      EntryRange<EntryOrder::pathOrder>  findByPath(std::string path) const;
+      LIBZIM_API EntryRange<EntryOrder::pathOrder>  findByPath(std::string path) const;
 
       /** Find a range of entry starting with title.
        *
@@ -404,7 +404,7 @@ namespace zim
        *         and ending past the last entry.
        *         If no entry starts with `title`, begin == end.
        */
-      EntryRange<EntryOrder::titleOrder> findByTitle(std::string title) const;
+      LIBZIM_API EntryRange<EntryOrder::titleOrder> findByTitle(std::string title) const;
 
       /** hasChecksum.
        *
@@ -413,14 +413,14 @@ namespace zim
        *
        * @return True if the archive has a checksum.
        */
-      bool hasChecksum() const;
+      LIBZIM_API bool hasChecksum() const;
 
       /** getChecksum.
        *
        * @return the checksum stored in the archive.
        *         If the archive has no checksum return an empty string.
        */
-      std::string getChecksum() const;
+      LIBZIM_API std::string getChecksum() const;
 
       /** Check that the zim file is valid (in regard to its checksum).
        *
@@ -428,7 +428,7 @@ namespace zim
        *
        *  @return True if the file is valid.
        */
-      bool check() const;
+      LIBZIM_API bool check() const;
 
       /** Check the integrity of the zim file.
        *
@@ -438,13 +438,13 @@ namespace zim
        *
        * @return True if the file is valid.
        */
-      bool checkIntegrity(IntegrityCheck checkType);
+      LIBZIM_API bool checkIntegrity(IntegrityCheck checkType);
 
       /** Check if the file is split in the filesystem.
        *
        *  @return True if the archive is split in different file (foo.zimaa, foo.zimbb).
        */
-      bool isMultiPart() const;
+      LIBZIM_API bool isMultiPart() const;
 
       /** Get if the zim archive uses the new namespace scheme.
        *
@@ -460,19 +460,19 @@ namespace zim
        *    To access metadatas, use `getMetadata` method.
        *  . Entry's path do not contains namespace ("foo.html")
        */
-      bool hasNewNamespaceScheme() const;
+      LIBZIM_API bool hasNewNamespaceScheme() const;
 
       /** Get a shared ptr on the FileImpl
        *
        *  @internal
        *  @return The shared_ptr
        */
-      std::shared_ptr<FileImpl> getImpl() const { return m_impl; }
+      LIBZIM_API std::shared_ptr<FileImpl> getImpl() const { return m_impl; }
 
 #ifdef ZIM_PRIVATE
-      cluster_index_type getClusterCount() const;
-      offset_type getClusterOffset(cluster_index_type idx) const;
-      entry_index_type getMainEntryIndex() const;
+      LIBZIM_API cluster_index_type getClusterCount() const;
+      LIBZIM_API offset_type getClusterOffset(cluster_index_type idx) const;
+      LIBZIM_API entry_index_type getMainEntryIndex() const;
 #endif
 
     private:
@@ -500,20 +500,20 @@ namespace zim
   template<EntryOrder order>
   class Archive::EntryRange {
     public:
-      explicit EntryRange(const std::shared_ptr<FileImpl> file, entry_index_type begin, entry_index_type end)
+      LIBZIM_API explicit EntryRange(const std::shared_ptr<FileImpl> file, entry_index_type begin, entry_index_type end)
         : m_file(file),
           m_begin(begin),
           m_end(end)
       {}
 
-      iterator<order> begin() const
+      LIBZIM_API iterator<order> begin() const
         { return iterator<order>(m_file, entry_index_type(m_begin)); }
-      iterator<order> end() const
+      LIBZIM_API iterator<order> end() const
         { return iterator<order>(m_file, entry_index_type(m_end)); }
-      int size() const
+      LIBZIM_API int size() const
         { return m_end - m_begin; }
 
-      EntryRange<order> offset(int start, int maxResults) const
+      LIBZIM_API EntryRange<order> offset(int start, int maxResults) const
       {
         auto begin = m_begin + start;
         if (begin > m_end) {

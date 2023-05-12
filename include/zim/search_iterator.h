@@ -32,38 +32,38 @@ namespace zim
 {
 class SearchResultSet;
 
-class LIBZIM_API SearchIterator : public std::iterator<std::bidirectional_iterator_tag, Entry>
+class SearchIterator : public std::iterator<std::bidirectional_iterator_tag, Entry>
 {
     friend class zim::SearchResultSet;
     public:
-        SearchIterator();
-        SearchIterator(const SearchIterator& it);
-        SearchIterator& operator=(const SearchIterator& it);
-        SearchIterator(SearchIterator&& it);
-        SearchIterator& operator=(SearchIterator&& it);
-        ~SearchIterator();
+        LIBZIM_API SearchIterator();
+        LIBZIM_API SearchIterator(const SearchIterator& it);
+        LIBZIM_API SearchIterator& operator=(const SearchIterator& it);
+        LIBZIM_API SearchIterator(SearchIterator&& it);
+        LIBZIM_API SearchIterator& operator=(SearchIterator&& it);
+        LIBZIM_API ~SearchIterator();
 
-        bool operator== (const SearchIterator& it) const;
-        bool operator!= (const SearchIterator& it) const;
+        LIBZIM_API bool operator== (const SearchIterator& it) const;
+        LIBZIM_API bool operator!= (const SearchIterator& it) const;
 
-        SearchIterator& operator++();
-        SearchIterator operator++(int);
-        SearchIterator& operator--();
-        SearchIterator operator--(int);
+        LIBZIM_API SearchIterator& operator++();
+        LIBZIM_API SearchIterator operator++(int);
+        LIBZIM_API SearchIterator& operator--();
+        LIBZIM_API SearchIterator operator--(int);
 
-        std::string getPath() const;
-        std::string getTitle() const;
-        int getScore() const;
-        std::string getSnippet() const;
-        int getWordCount() const;
-        DEPRECATED int getSize() const;
-        int getFileIndex() const;
-        Uuid getZimId() const;
-        reference operator*() const;
-        pointer operator->() const;
+        LIBZIM_API std::string getPath() const;
+        LIBZIM_API std::string getTitle() const;
+        LIBZIM_API int getScore() const;
+        LIBZIM_API std::string getSnippet() const;
+        LIBZIM_API int getWordCount() const;
+        LIBZIM_API DEPRECATED int getSize() const;
+        LIBZIM_API int getFileIndex() const;
+        LIBZIM_API Uuid getZimId() const;
+        LIBZIM_API reference operator*() const;
+        LIBZIM_API pointer operator->() const;
 
 #ifdef ZIM_PRIVATE
-        std::string getDbData() const;
+        LIBZIM_API std::string getDbData() const;
 #endif
 
     private:

@@ -49,7 +49,7 @@ namespace zim
      */
     class IndexData {
       public:
-        LIBZIM_API using GeoPosition = std::tuple<bool, double, double>;
+        using GeoPosition = std::tuple<bool, double, double>;
         LIBZIM_API virtual ~IndexData() = default;
 
         /**
